@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Quotes machine</title>
+	<meta name="description" content="this app show the quotes">
+	<link href="https://fonts.googleapis.com/css?family=Bree+Serif|Josefin+Sans" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<style>
+	*{
+		box-sizing:border-box;
+
+	}
+
+	body{
+		width:100%;
+		background-color:#DA413D;
+		margin:0;
+		padding:0;
+		font-family: 'Josefin Sans', sans-serif;
+		transition:1.5s;
+	}
+	
+	main{
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		width: 100%;
+		transform: translate(-50%,-50%);
+	}
+
+	.content{
+		width:40%;
+		margin:auto;
+		border:none;
+		border-radius:4px;
+		padding:15px;
+		background-color:#fff;
+		    
+	}
+	
+	.quote{
+		text-align:center;
+		font-size:2em;
+		text-transform: capitalize;
+		color:#DA413D;
+	}
+	
+	.author{
+		text-align:right;
+		font-style:italic;
+		font-size:1em;
+		text-transform: capitalize;
+		color:#DA413D;
+	}
+	
+	.action{
+		display:flex;
+		justify-content:space-between;
+		flex-wrap:wrap;
+	}
+	
+	button{
+		color:#fff;
+		background:#DA413D;
+		border-radius:4px;
+		padding:5px 10px;
+		border:1px solid;
+		box-shadow:none;
+	}
+	
+	button:hover{
+		background-color:#d62f29
+	}
+	
+	footer p{
+		text-align:center;
+		color:#fff;
+	}
+	</style>
+</head>
+<body>
+<main>
+	<div class="content">
+		<div class="quote">
+			<i class="fa fa-quote-left"></i>
+			<span></span>
+		</div>
+		<div class="author">
+			<p></p>
+		</div>
+		<div class="action">
+			<a href="twitter.com"><button type="button" class="twitter"><i class="fa fa-twitter"></i></button></a>
+			<button type="button" class="new">New quote</button>
+		</div>
+	</div>
+	<footer>
+		<p>By Mahfudz Aji</p>
+	</footer>
+</main>
+
+</body>
+<script type="text/javascript">
+$(document).ready(function(){
+	var quotes={
+	quote:["I know where I'm going and I know the truth, and I don't have to be what you want me to be. I'm free to be what I want.","Barangsiapa ingin mutiara, harus berani terjun di lautan yang dalam","kurang cerdas dapat diperbaiki dengan belajar. kurang cakap dapat dihilangkan dengan pengalaman. namun tidak jujur itu sulit diperbaiki.","Suffering is a gift. In it is hidden mercy."],
+	author:['muhammad ali','Soekarno','mohammad hatta','Jalaluddin Rumi']
+	};
+	
+	var currentQuote=1;
+	$(".quote").find("span").html(quotes['quote'][currentQuote]);
+	$(".author").find("p").html("-"+quotes['author'][currentQuote]);
+
+	$(".new").on("click",function(){
+		var quoteLength=quotes['quote'].length;
+
+		var selectedQuote=Math.floor(Math.random()*(quoteLength-1));
+
+		while(selectedQuote==currentQuote){
+			selectedQuote=Math.floor(Math.random()*quoteLength);
+		}
+		
+		var color="rgb("+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+","+Math.floor(Math.random()*255)+")";
+		$("body").css("background-color",color);
+		$(".content").find(".quote , .author").css("color",color);
+		$("button").css("background-color",color);
+		
+		$(".quote").find("span").html(quotes['quote'][selectedQuote]);
+		$(".author").find("p").html("-"+quotes['author'][selectedQuote]);
+		
+		
+		
+		currentQuote=selectedQuote;
+		
+	});
+});
+</script>
+</html>
